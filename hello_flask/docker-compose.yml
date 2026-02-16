@@ -1,0 +1,27 @@
+version: '3.14'               #specifies which version of the docker-compose file format to use.
+
+services:
+  db:
+    image: mysql:8
+    container_name: mydb
+    environment:
+      MYSQL_ROOT_PASSWORD: my-secret-pw
+    networks:
+      - my-custom-network
+
+  web:
+    image: 891377356090.dkr.ecr.us-east-1.amazonaws.com/flask-mysql:latest
+    container_name: flask-app
+    ports:
+      - "5002:5002"
+    depends_on:
+      - db
+    networks:
+      - my-custom-network
+
+networks:
+  my-custom-network:
+    external: true
+
+
+#build: .  # tells docker compose to build the web service using the Dockerfile in the current directory (.)
