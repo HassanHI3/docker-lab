@@ -10,7 +10,7 @@ services:
       - my-custom-network
 
   web:
-    image: 891377356090.dkr.ecr.us-east-1.amazonaws.com/flask-mysql:latest
+    image: my-flask-app:multistage
     container_name: flask-app
     ports:
       - "5002:5002"

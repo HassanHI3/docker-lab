@@ -5,19 +5,39 @@
 #Specifying the port number that the container will listen on
 #Shows which commands to run when the container starts
 
-FROM  python:3.14-slim
-WORKDIR  /app
-COPY   . .
-# deps needed to build mysqlclient
+# FROM  python:3.14-slim
+# WORKDIR  /app
+# COPY   . .
+# # deps needed to build mysqlclient
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+#     build-essential \
+#     pkg-config \
+#     default-libmysqlclient-dev \
+#     && rm -rf /var/lib/apt/lists/*
+
+# RUN pip install --no-cache-dir flask mysqlclient
+# EXPOSE 5002
+# CMD    ["python" , "app.py"]
+
+# mysqlclient package is needed to connect to the MySQLdb  from within our python app
+# custom network needed to connect the flask app to the mysql database container - (docker network create my-custom-network)
+
+#stage 1 of multi stage build
+FROM python:3.14-slim
+WORKDIR /app
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     pkg-config \
     default-libmysqlclient-dev \
     && rm -rf /var/lib/apt/lists/*
 
+COPY . .
 RUN pip install --no-cache-dir flask mysqlclient
-EXPOSE 5002
-CMD    ["python" , "app.py"]
 
-# mysqlclient package is needed to connect to the MySQLdb  from within our python app
-# custom network needed to connect the flask app to the mysql database container - (docker network create my-custom-network)
+#stage 2 production image
+FROM python:3.14-slim
+WORKDIR /app /app
+COPY --from=0 /app /app
+EXPOSE 5002
+CMD ["python", "app.py"]
