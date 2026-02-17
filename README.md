@@ -53,7 +53,7 @@ Inside a container:
 - Exposes port 5002
 - Runs the application using python app.py
 
-- ▶️ Running the Application
+ ▶️ Running the Application
 - 1️⃣ Build the Docker Image
 - docker build -t hello-flask-mysql .
 - 2️⃣ Run the Container
