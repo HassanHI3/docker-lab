@@ -19,15 +19,15 @@ The difference between host networking and container networking
 - Docker Compose
 
 🏗 Architecture Overview
-Host Machine
+- Host Machine
     ↓
-Docker Engine
+- Docker Engine
     ↓
-Containers
+- Containers
     ├── Flask App Container
     └── MySQL Database Container
     ↓
-Custom Bridge Network
+- Custom Bridge Network
 
 Key Networking Concept
 The Flask container connects to MySQL using the Docker Compose service name as the hostname, not localhost.
