@@ -12,11 +12,11 @@ How to use Docker Compose for multi-container setups
 The difference between host networking and container networking
 
 🛠 Tech Stack
-Python 3 (Slim Image)
-Flask
-MySQL
-Docker
-Docker Compose
+- Python 3 (Slim Image)
+- Flask
+- MySQL
+- Docker
+- Docker Compose
 
 🏗 Architecture Overview
 Host Machine
