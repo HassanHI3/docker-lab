@@ -1,35 +1,41 @@
  # Docker Learning 
 
-Flask + MySQL Docker Lab
-Project Overview:
+🐳 Docker Learning – Flask + MySQL Lab
 
+📌 Project Overview
 This lab demonstrates how to containerise a simple Flask web application and connect it to a MySQL database using Docker.
-The goal was to understand:
-How Docker packages applications
+The objective of this project was to understand:
+How Docker packages applications into images
+How containers run in isolated environments
 How containers communicate using Docker networking
 How to use Docker Compose for multi-container setups
-How images are built and run in isolated environments
+The difference between host networking and container networking
 
-Tech Stack:
+🛠 Tech Stack
 Python 3 (Slim Image)
 Flask
 MySQL
 Docker
 Docker Compose
 
-Architecture Overview
+🏗 Architecture Overview
 Host Machine
-⬇
+    ↓
 Docker Engine
-⬇
-Containers:
-Flask App Container
-MySQL Database Container
-⬇
-Custom Docker Network (bridge)
+    ↓
+Containers
+    ├── Flask App Container
+    └── MySQL Database Container
+    ↓
+Custom Bridge Network
 
-The Flask container connects to MySQL using the service name as the hostname, not localhost.
-Project Structure
+Key Networking Concept
+The Flask container connects to MySQL using the Docker Compose service name as the hostname, not localhost.
+
+Inside a container:
+localhost refers to the container itself
+Services communicate using the Docker network
+📂 Project Structure
 hello_flask/
 │
 ├── app.py
@@ -37,44 +43,55 @@ hello_flask/
 ├── docker-compose.yml
 └── README.md
 
-Dockerfile Breakdown
-Uses python:3.x-slim
+📦 Dockerfile Breakdown
+Uses python:3.x-slim as a lightweight base image
 Sets working directory to /app
 Installs system dependencies for MySQL client
 Installs Python dependencies (flask, mysqlclient)
 Exposes port 5002
-Runs the app using python app.py
+Runs the application using python app.py
 
-Running the App
-1️⃣ Build the image
+▶️ Running the Application
+1️⃣ Build the Docker Image
 docker build -t hello-flask-mysql .
-2️⃣ Run with Docker
+2️⃣ Run the Container
 docker run -p 5002:5002 hello-flask-mysql
+
 Access in browser:
 http://localhost:5002
 
-Running with Docker Compose (App + DB)
+🐳 Running with Docker Compose (App + Database)
 docker compose up -d
-This:
+This command:
 Creates both containers
-Connects them on the same network
+Connects them to the same Docker network
 Automatically handles service dependencies
+Runs the application and database together
 
-Key Concepts Learned
-Containers are isolated but can communicate via Docker networks
-localhost inside a container ≠ host machine
-Docker Compose simplifies multi-container applications
-YAML structure must be correctly formatted
-GitHub SSH vs HTTPS authentication differences
+🧠 Key Concepts Learned
+Containers are isolated but can communicate through Docker networks
+localhost inside a container is not the host machine
+Docker Compose simplifies multi-container orchestration
+YAML formatting must be precise
+SSH vs HTTPS authentication differences when pushing to GitHub
+Container networking vs local machine networking
 
-Issues Faced & Resolved
-Permission denied when pushing to GitHub (SSH account mismatch)
-Docker Compose service reference errors
-Understanding container networking vs local networking
+🛠 Issues Faced & Resolved
+GitHub Permission Denied (403)
+Cause: SSH account mismatch
+Fix: Correct SSH key configuration
 
-Learning Outcome
+Docker Compose Service Reference Error
+Cause: Incorrect service dependency definition
+Fix: Correct YAML structure and service naming
+
+Container Networking Confusion
+Cause: Attempting to use localhost between containers
+Fix: Use Docker service name as hostname
+
+🎯 Learning Outcome
 By completing this lab, I now understand:
 How to containerise backend applications
-How services communicate across Docker networks
-How to debug container build and networking issues
-The foundation needed before moving into Kubernetes
+How multi-container applications communicate
+How to debug Docker build and networking issues
+The foundational concepts required before moving into Kubernetes
