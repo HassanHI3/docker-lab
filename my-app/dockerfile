@@ -1,0 +1,16 @@
+# This is the docker file that sets up the env for the first app image.
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN python -m pip install --no-cache-dir -r requirements.txt flask redis
+
+COPY . .
+
+# App runs on 5005 (matches app.py + docker-compose)
+EXPOSE 5005
+
+CMD ["python", "app.py"]
