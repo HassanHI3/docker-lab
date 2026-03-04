@@ -21,7 +21,9 @@ Each page refresh increments the visitor count stored in Redis.
 
 How to Run
 Build and start services:
+```bash
 docker compose up --build
+```
 
 Visit:
 http://localhost:5005
@@ -45,12 +47,20 @@ Multi-stage Docker build — Reduces image size
 
 How to Run
 Build and start services:
+```bash
 docker compose up --build
+```
 
 Visit the app:
+```bash
+docker compose up --build
+```
 http://localhost:5002
 MySQL Configuration
 MySQL root password:
+```bash
+docker compose up --build
+```
 my-secret-pw
 Database service name:
 mydb
