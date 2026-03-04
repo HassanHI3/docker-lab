@@ -1,82 +1,48 @@
- # Docker Learning 
-
-🐳 Docker based project
+🐳 Docker Projects
+This repository contains two Docker-based projects demonstrating containerised web applications and multi-container architectures using Docker Compose.
+my-app — Multi-container Flask + Redis application
+hello_flask — Flask + MySQL application containerised with Docker
+📂 1. my-app — Flask + Redis
 Overview
-
-This repository contains small projects built to practice Docker fundamentals and multi-container application development.
-
-The projects demonstrate how to containerise applications, connect services together using Docker networking, and manage multiple containers with Docker Compose.
-
-Tech Stack:
-Docker
-Docker Compose
-Python (Flask)
-MySQL
-Redis
-
-Projects:
-1️⃣ Flask + MySQL Application
-A containerised Flask application connected to a MySQL database.
-
-**Concepts demonstrated**
-- Writing Dockerfiles
-- Multi-stage builds
-- Running multiple containers with Docker Compose
-- Container-to-container communication using service names
-- Database connectivity from containers
-
-Project folder:
-hello_flask/
-
-2️⃣ Flask + Redis Visitor Counter
-A simple Flask web app that connects to Redis to store and increment a visitor counter.
-Each refresh increases the visitor count stored in Redis, demonstrating persistent container communication.
-Concepts demonstrated
-Multi-container applications
-Service discovery in Docker networks
-Using Redis as a key-value store
-Container orchestration with Docker Compose
-
-Project folder:
-my-app/
-
-**How to Run the Project**
-Navigate to the project folder and run:
-- docker compose up --build
-
-Then open the application in your browser using the port specified in the project.
-
-**Key Concepts Practiced**
-Containerisation with Docker
-Building images with Dockerfiles
-Multi-container architectures
-Docker networking and service discovery
-Application orchestration with Docker Compose
-
-🧠 **Key Concepts Learned**
-- Containers are isolated but can communicate through Docker networks
-- localhost inside a container is not the host machine
-- Docker Compose simplifies multi-container orchestration
-- YAML formatting must be precise
-- SSH vs HTTPS authentication differences when pushing to GitHub
-- Container networking vs local machine networking
-
-🛠 **Issues Faced & Resolved**
-GitHub Permission Denied (403)
-- Cause: SSH account mismatch
-- Fix: Correct SSH key configuration
-
-**Docker Compose Service Reference Error**
-- Cause: Incorrect service dependency definition
-- Fix: Correct YAML structure and service naming
-
-**Container Networking Confusion**
-- Cause: Attempting to use localhost between containers
-- Fix: Use Docker service name as hostname
-
-🎯 **Learning Outcome**
-- By completing this lab, I now understand:
-- How to containerise backend applications
-- How multi-container applications communicate
-- How to debug Docker build and networking issues
-- The foundational concepts required before moving into Kubernetes
+A simple Python Flask web application connected to a Redis database.
+The application stores and increments a visitor counter using Redis, demonstrating inter-container communication using Docker Compose.
+Features
+Flask — Python web framework for serving pages
+Redis — Key-value store used to track visitor counts
+Docker Compose — Runs and manages multiple containers
+Endpoint
+/ → Displays a welcome message and visitor count
+Each page refresh increments the visitor count stored in Redis.
+How to Run
+Build and start services:
+docker compose up --build
+Visit:
+http://localhost:5005
+Container Communication
+The Flask container connects to Redis using the Docker service name:
+redis
+This demonstrates Docker networking where containers communicate using service names instead of localhost.
+📂 2. hello_flask — Flask + MySQL
+Overview
+A Python Flask application connected to a MySQL database using Docker Compose.
+The application retrieves the MySQL version from the database and displays it in the browser.
+Features
+Flask — Python web framework
+MySQL — Relational database
+Docker Compose — Multi-container orchestration
+Multi-stage Docker build — Reduces image size
+How to Run
+Build and start services:
+docker compose up --build
+Visit the app:
+http://localhost:5002
+MySQL Configuration
+MySQL root password:
+my-secret-pw
+Database service name:
+mydb
+The Flask application connects to MySQL using the service name defined in docker-compose.yml.
+Notes
+The my-app project demonstrates container-to-container communication using Redis.
+The hello_flask project demonstrates Dockerising a web application connected to a relational database.
+Both projects demonstrate multi-container architectures using Docker Compose and can be extended for deployment to container platforms such as AWS ECS, ECR, or Kubernetes.
