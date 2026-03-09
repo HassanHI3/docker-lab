@@ -10,7 +10,7 @@ RUN python -m pip install --no-cache-dir -r requirements.txt flask redis
 
 COPY . .
 
-# App runs on 5005 (matches app.py + docker-compose)
-EXPOSE 5005
+# App runs on 5006 (matches app.py + docker-compose)
+EXPOSE 5006
 
 CMD ["python", "app.py"]
