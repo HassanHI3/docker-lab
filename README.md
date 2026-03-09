@@ -45,7 +45,7 @@ docker compose up --build
 
 Open your browser and go to:
 ```bash
-[docker compose up --build] (http://localhost:5006)
+http://localhost:5006
 ```
 - Visit the home page: You’ll see a welcome message
 
@@ -99,11 +99,11 @@ http://localhost:5002
 
 ### MySQL Configuration
 - MySQL root password: my-secret-pw (set in docker-compose.yml)
-- Database service name: mydb (used as DB_HOST in Flask app)
+- Database service name: db (named as mydb as a container in docker-compose.yml)
 
 ### Database service name
 ```bash
-mydb
+db
 ```
 ### Notes
 
