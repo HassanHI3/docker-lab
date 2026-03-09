@@ -14,3 +14,14 @@ services:
     container_name: first-redis
     ports:
       - "6379:6379"
+
+  nginx: 
+   image: nginx:latest 
+   container_name: nginx-proxy
+   volume: ./nginx.conf:/etc/nginx/nginx.conf
+   depends_on: web
+   ports:
+    - "5005:5005"
+
+   volumes:
+      redis-data:
